@@ -1,26 +1,21 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <transition name="fade">
+    <UiAlert
+      v-if="locationDetails"
+      :text="locationDetails"
+      @close-alert="store.defineInfoText('')"
+    />
+  </transition>
+
+  <MapView/>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue';
+<script setup>
+import { storeToRefs } from 'pinia';
+import { useStore } from '@/store/store';
+import MapView from '@/components/map/MapView.vue';
+import UiAlert from '@/components/UiAlert.vue';
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld,
-  },
-};
+const store = useStore();
+const { locationDetails } = storeToRefs(store);
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
