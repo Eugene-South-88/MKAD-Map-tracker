@@ -17,14 +17,13 @@ const createMKADArea = (myMap) => {
 
 const getDistance = (distance) => Math.round(distance) / 1000;
 
-const defineInfoText = (text) => {
-  store.defineInfoText(text);
-};
+const createPlacemark = (coords) => new window.ymaps.Placemark(coords);
 
 onMounted(() => {
   window.ymaps.ready(() => {
-    const createPlacemark = (coords) => new window.ymaps.Placemark(coords);
     let myPlacemark;
+    let myRoute = null;
+    let line = null;
 
     const myMap = new window.ymaps.Map('map', {
       center: [55.76, 37.64],
@@ -32,8 +31,6 @@ onMounted(() => {
     }, { searchControlProvider: 'yandex#search' });
 
     const myPolygon = createMKADArea(myMap);
-    let myRoute = null;
-    let line = null;
 
     myMap.events.add('click', async (e) => {
       if (store.isLoading) return;
@@ -86,7 +83,7 @@ onMounted(() => {
           });
       });
 
-      defineInfoText(locationDetails);
+      store.defineInfoText(locationDetails);
     });
   });
 });

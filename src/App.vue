@@ -1,9 +1,9 @@
 <template>
   <transition name="fade">
     <UiAlert
-      v-if="locationDetails"
+      v-if="isAlertActive"
       :text="locationDetails"
-      @close-alert="store.defineInfoText('')"
+      @close-alert="isAlertActive = false"
     />
   </transition>
 
@@ -17,5 +17,8 @@ import MapView from '@/components/map/MapView.vue';
 import UiAlert from '@/components/UiAlert.vue';
 
 const store = useStore();
-const { locationDetails } = storeToRefs(store);
+const {
+  locationDetails,
+  isAlertActive,
+} = storeToRefs(store);
 </script>

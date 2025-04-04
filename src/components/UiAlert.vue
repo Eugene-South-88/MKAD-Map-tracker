@@ -1,7 +1,17 @@
 <template>
-  <div v-if="text" class="info">
-    <div>{{ text }}</div>
-    <button class="close" @click="close">&times;</button>
+  <div
+    v-if="text"
+    class="info"
+  >
+    <h3>
+      {{ text }}
+    </h3>
+    <button
+      class="close"
+      @click="close"
+    >
+      &times;
+    </button>
   </div>
 </template>
 
@@ -48,6 +58,11 @@ button{
 
 .info:hover {
   transform: scale(1.05);
+}
+
+h3{
+  font-weight: normal;
+  margin: 0;
 }
 
 .close {
